@@ -12,6 +12,7 @@ int main()
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 	srand(time(NULL));
+	/*
 	std::ofstream file;
 	std::string path = "Document.txt";
 	std::string pathSal = "Salary.txt";
@@ -21,6 +22,8 @@ int main()
 	std::string prof;
 	std::string dumpl;
 	
+	char what;
+
 	int age;
 	int choice;
 
@@ -75,14 +78,71 @@ int main()
 	{
 		file << name << "\n" << age << "\n" << prof << "\n" << dumpl << "\n" << yuan << "\n\n";
 	}
+
+
 	file.close();
 		
 	}
+	*/
+	
+	std::ifstream fin;
+	std::ofstream file;
+	std::string newpath = "Stix.txt";
+	std::string path = "Document.txt";
+	int size;
+	char sym;
+	std::string data;
+
+	std::cout << "Введите количество символов для слова: ";
+	std::cin >> size;
 
 
-	
-	
+	fin.open(path);
+	file.open(newpath);
+	if (!fin.is_open())
+	{
+		std::cerr << "Error";
+	}
+	else
+	{
+		
+		
+		
+		while (!fin.eof())
+		{
+			data = "";
+			while (fin.get(sym))
+			{
+				if (sym != ',' && sym != '.' && sym != '—' && sym != '!' && sym != '-')
+				{
+					if (sym == ' ' || sym == '\n')
+					{
+						if (data.size() >= size)
+						{
+							file << data << "\n";
+						}
+						data = "";
+					}
+					else
+					{
+						data += sym;
+					}
+					
+				}
+				
+			}
+			std::cout << data << "\n";
 
-	
+
+
+			//data = "";
+			//std::getline(fin, data);
+			//size = data.size();
+			//std::cout << size << '\n';
+		}
+	}
+	file.close();
+	fin.close();
+
 	return 0;
 }
